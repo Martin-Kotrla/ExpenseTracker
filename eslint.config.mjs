@@ -1,18 +1,14 @@
-import { defineConfig, globalIgnores } from "eslint/config";
-import nextVitals from "eslint-config-next/core-web-vitals";
-import nextTs from "eslint-config-next/typescript";
+import JSONConfig from "./eslint/JSONConfig.mjs"
+import EcmascriptConfig from "./eslint/EcmascriptConfig.mjs"
+import HTMLConfig from "./eslint/HTMLConfig.mjs"
+import YAMLConfig from "./eslint/YAMLConfig.mjs"
 
-const eslintConfig = defineConfig([
-  ...nextVitals,
-  ...nextTs,
-  // Override default ignores of eslint-config-next.
-  globalIgnores([
-    // Default ignores of eslint-config-next:
-    ".next/**",
-    "out/**",
-    "build/**",
-    "next-env.d.ts",
-  ]),
-]);
-
-export default eslintConfig;
+export default [
+  HTMLConfig,
+  JSONConfig,
+  YAMLConfig,
+  ...EcmascriptConfig,
+  {
+    ignores: [ "node_modules", "dist", "build", "coverage", ".next", ".turbo", ".yarn" ],
+  },
+]
